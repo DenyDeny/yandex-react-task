@@ -2,9 +2,9 @@ import React from 'react';
 import { Page } from '../Page';
 import { Start } from '../Start';
 
-export function Home() {
+export function Home(props) {
     return (
-        <Page>
+        <Page {...props}>
             <Start />
         </Page>
     )

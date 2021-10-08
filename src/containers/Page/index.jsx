@@ -15,20 +15,23 @@ import {
     Wrapper,
 } from './styled';
 
-export function Page({ children }) {
+export function Page({ children, location: { pathname } }) {
+    const isShowedSettingsButton = !pathname.includes('settings');
     return (
         <Wrapper>
             <Header>
                 <HeaderTitle>School CI server</HeaderTitle>
-                <StyledLink to='/settings'>
-                    <Button
-                        icon={<MiniSettings size={12} />}
-                        color='gray'
-                        side={8}
-                    >
-                        <LinkButtonText>Settings</LinkButtonText>
-                    </Button>
-                </StyledLink>
+                {isShowedSettingsButton && (
+                    <StyledLink to='/settings'>
+                        <Button
+                            icon={<MiniSettings size={12} />}
+                            color='gray'
+                            side={8}
+                        >
+                            <LinkButtonText>Settings</LinkButtonText>
+                        </Button>
+                    </StyledLink>
+                )}
             </Header>
             <Content>{children}</Content>
             <Footer>

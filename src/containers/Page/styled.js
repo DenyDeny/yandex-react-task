@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
   height: 100%;
   margin: 0 auto;
-  justify-content: space-between;
 `;
 
 export const Header = styled.header`
@@ -23,15 +23,17 @@ export const HeaderTitle = styled.h2`
 
 export const Content = styled.div`
   padding: 0 6.25rem;
-  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 `;
 
 export const Footer = styled.footer`
   align-self: normal;
   padding: 0.5rem 6.25rem;
   background-color: var(--blue-grey-50);
+  margin-top: auto;
 `;
 
 export const FooterLinks = styled.div`

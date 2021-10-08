@@ -37,6 +37,8 @@ export const GlobalStyle = createGlobalStyle`
         --orange: #ff9a00;
         --red-500: #ff3333;
         --red-600: #e00000;
+        // second colors
+        --color-text-second: #ccc;
         // font
         --font-family: 'YS Text','Helvetica Neue', Arial, sans-serif;
         // focused
@@ -47,6 +49,8 @@ export const GlobalStyle = createGlobalStyle`
         --gray-hovered: #dbdbdb;
         // disabled
         --disabled: #F2F2F2;
+        // control border color
+        --field-border-color: #D9D9D9;
     }
 
     html,

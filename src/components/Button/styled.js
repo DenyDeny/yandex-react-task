@@ -34,10 +34,11 @@ export const Wrapper = styled.button`
     display: flex;
     outline: none;
     border-radius: 4px;
-    padding: ${props => props.side}px;
+    padding: ${props => props.side === 8? 8 : 12}px ${props => props.side}px;
     background-color: ${({ color }) => getColorName(color)};
     border: 2px solid ${({ color }) => getColorName(color)};
     cursor: pointer;
+    height: ${({ height }) => height}rem;
 
     &:hover {
       background-color: ${({ color }) => getHoveredColorName(color)};
