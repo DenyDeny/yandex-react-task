@@ -13,9 +13,15 @@ const Field = styled.input`
   box-sizing: border-box;
   display: flex;
   border-radius: 4px;
-  border: 2px solid var(--field-border-color);
+  border: 2px solid ${({ errorMessage }) =>
+    errorMessage ? 'var(--red-500)' : 'var(--field-border-color)' };
   width: 100%;
   padding: 0.75rem;
+
+  &:focus {
+    outline: none;
+    border-color: var(--gray-border-color);
+  }
 
   &input[type='number'] {
     -moz-appearance:textfield;
@@ -102,6 +108,7 @@ export function FormField({
                     name={name}
                     placeholder={placeholder}
                     value={value}
+                    errorMessage={errorMessage}
                     {...other}
                 />
                 {canClear && <StyledClearField onClick={clearField} size={16} />}
