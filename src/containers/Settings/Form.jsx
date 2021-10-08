@@ -62,10 +62,13 @@ const initialState = {
 export function Form() {
     const history = useHistory();
 
+    const [saving, setSaving] = useState(false);
+
     const context = useContext(SettingsContext);
     const saveSettings = context?.saveSettings;
+    const settings = context?.settings;
 
-    const [saving, setSaving] = useState(false);
+    const initSettings = (initial) => ({...initialState, ...settings}) || initial;
 
     const [{
         repository,
@@ -73,7 +76,7 @@ export function Form() {
         branch,
         period,
         errors,
-    }, dispatch] = useReducer(formReducer, initialState);
+    }, dispatch] = useReducer(formReducer, initialState, initSettings);
 
     const handleTextChange = useCallback((e) => {
         dispatch({
