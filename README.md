@@ -1,2 +1,5 @@
-# yandex-react-task
-ci server client
+# ci server client
+
+To run this project use commands:
+1. npm i
+2. npm start
