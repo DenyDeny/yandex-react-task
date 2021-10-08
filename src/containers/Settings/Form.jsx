@@ -62,7 +62,8 @@ const initialState = {
 export function Form() {
     const history = useHistory();
 
-    const { saveSettings } = useContext(SettingsContext);
+    const context = useContext(SettingsContext);
+    const saveSettings = context?.saveSettings;
 
     const [saving, setSaving] = useState(false);
 

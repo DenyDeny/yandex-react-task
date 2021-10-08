@@ -17,7 +17,8 @@ import {
 } from './styled';
 
 export function Page({ children, location: { pathname } }) {
-    const { settings: { settledSettings } } = useContext(SettingsContext);
+    const { settings } = useContext(SettingsContext);
+    const settledSettings = settings?.settledSettings;
     const isShowedSettingsButton = !pathname.includes('settings') && !settledSettings;
 
     return (

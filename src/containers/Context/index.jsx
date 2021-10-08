@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, useMemo } from 'react';
 import settingsReducer, { SAVE_SETTINGS } from './settingsReducer';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 export const SettingsContext = createContext(null);
 
@@ -12,7 +13,9 @@ const initialState = {
 };
 
 export function ContextComponent({ children }) {
-    const [settings, dispatch] = useReducer(settingsReducer, initialState);
+    const [storageSettings, setStorageSettings] = useLocalStorage('settings', '');
+    const initSettings = (initial) => storageSettings || initial;
+    const [settings, dispatch] = useReducer(settingsReducer, initialState, initSettings);
 
     const saveSettings = async (settings) => {
         return new Promise((resolve => {
@@ -21,6 +24,7 @@ export function ContextComponent({ children }) {
                     type: SAVE_SETTINGS,
                     payload: settings,
                 });
+                setStorageSettings({ ...settings, settledSettings: true })
                 resolve({ isSaved: true });
             }, 500);
         }))
