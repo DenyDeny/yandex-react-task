@@ -1,10 +1,11 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useState, useReducer, useCallback, useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import { validate } from '../../utils';
 import { Button } from '../../components/Button';
 import { FormField } from './FormField';
 import formReducer, { HANDLE_INPUT_TEXT, CLEAR_FIELD, SET_ERRORS } from './reducers/formReducer';
+import { SettingsContext } from '../Context';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -58,8 +59,12 @@ const initialState = {
     }
 };
 
-export function Form(props) {
+export function Form() {
     const history = useHistory();
+
+    const { saveSettings } = useContext(SettingsContext);
+
+    const [saving, setSaving] = useState(false);
 
     const [{
         repository,
@@ -95,12 +100,22 @@ export function Form(props) {
         return Object.keys(errors).length === 0;
     }
 
-    const handleSubmit = useCallback((e) => {
+    const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
         const errors = validate({ repository, buildCommand, period });
         setErrors(errors);
         if (isFormValid(errors)) {
-            console.log('submit');
+            setSaving(true);
+            const { isSaved } = await saveSettings({
+                repository,
+                buildCommand,
+                period,
+                branch,
+            })
+            setSaving(false);
+            if (isSaved) {
+                history.push('/')
+            }
         }
     }, [repository, buildCommand, branch, period]);
 
@@ -158,10 +173,16 @@ export function Form(props) {
                         onClick={handleSubmit}
                         color='yellow'
                         side={20}
+                        disabled={saving}
                     >
                         Save
                     </Button>
-                    <Button onClick={handleCancel} color='gray' side={20}>
+                    <Button
+                        onClick={handleCancel}
+                        color='gray'
+                        side={20}
+                        disabled={saving}
+                    >
                         Cancel
                     </Button>
                 </ActionsButtonsGroup>

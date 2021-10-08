@@ -55,6 +55,8 @@ export const Wrapper = styled.button`
 
     &[disabled] {
         background-color: var(--disabled);
+        border-color: var(--disabled);
+        cursor: not-allowed;
     }
 
 `;

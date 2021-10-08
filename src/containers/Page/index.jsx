@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../../components/Button';
 import { MiniSettings } from '../../components/Icon';
+import { SettingsContext } from '../Context';
 import {
     Content,
     Header,
@@ -16,7 +17,9 @@ import {
 } from './styled';
 
 export function Page({ children, location: { pathname } }) {
-    const isShowedSettingsButton = !pathname.includes('settings');
+    const { settings: { settledSettings } } = useContext(SettingsContext);
+    const isShowedSettingsButton = !pathname.includes('settings') && !settledSettings;
+
     return (
         <Wrapper>
             <Header>

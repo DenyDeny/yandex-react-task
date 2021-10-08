@@ -5,11 +5,12 @@ import {
     Route,
 } from "react-router-dom";
 import { GlobalStyle } from './globalStyle';
+import { ContextComponent } from './containers/Context';
 import routes from './routes';
 
 export function App() {
     return (
-        <Fragment>
+        <ContextComponent>
             <GlobalStyle />
             <Router>
                 <Switch>
@@ -18,12 +19,11 @@ export function App() {
                             path={route.path}
                             key={index}
                             exact={route.exact}
-                        >
-                            {route.component}
-                        </Route>
+                            component={route.component}
+                        />
                     ))}
                 </Switch>
             </Router>
-        </Fragment>
+        </ContextComponent>
     );
 }
