@@ -39,6 +39,7 @@ export const GlobalStyle = createGlobalStyle`
         --red-600: #e00000;
         // second colors
         --color-text-second: #ccc;
+        --secondary: rgba(0, 0, 0, 0.3);
         // font
         --font-family: 'YS Text','Helvetica Neue', Arial, sans-serif;
         // focused

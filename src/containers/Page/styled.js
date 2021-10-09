@@ -66,3 +66,7 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
   }
 `;
+
+export const RepoTitle = styled(HeaderTitle)`
+  color: var(--black);
+`;

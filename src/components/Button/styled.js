@@ -38,7 +38,6 @@ export const Wrapper = styled.button`
     background-color: ${({ color }) => getColorName(color)};
     border: 2px solid ${({ color }) => getColorName(color)};
     cursor: pointer;
-    height: ${({ height }) => height}rem;
 
     &:hover {
       background-color: ${({ color }) => getHoveredColorName(color)};

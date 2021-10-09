@@ -1,7 +1,6 @@
 export function validate({
     repository = '',
     buildCommand = '',
-    period = 0,
 }) {
     const errors = {};
 
@@ -14,9 +13,48 @@ export function validate({
 
     }
 
-    if (typeof period !== 'number') {
-        errors.branch = 'You can use numbers only'
-    }
-
     return errors;
 }
+
+export function formatDate(timestamp) {
+    const months = [
+        'Январь',
+        'Февраль',
+        'Март',
+        'Апрель',
+        'Май',
+        'Июнь',
+        'Июль',
+        'Август',
+        'Сентябрь',
+        'Октябрь',
+        'Ноябрь',
+        'Декабрь',
+    ]
+
+    const date = new Date(timestamp * 1000);
+    const day = `0${date.getDate()}`.slice(-2);
+    const month = months[date.getMonth()];
+    const hours = `0${date.getDate()}`.slice(-2);
+    const minutes = `0${date.getMinutes()}`.slice(-2);
+
+    return {
+        day,
+        month,
+        hours,
+        minutes,
+    }
+}
+
+export function getDuration(timestamp) {
+    const diff = Date.now() - timestamp;
+    const date = new Date(diff);
+    const hours = `0${date.getDate()}`.slice(-2);
+    const minutes = `0${date.getMinutes()}`.slice(-2);
+
+    return {
+        hours,
+        minutes,
+    }
+}
+

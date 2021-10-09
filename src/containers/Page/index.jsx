@@ -12,6 +12,7 @@ import {
     FooterItem,
     FooterAddress,
     LinkButtonText,
+    RepoTitle,
     StyledLink,
     Wrapper,
 } from './styled';
@@ -19,12 +20,16 @@ import {
 export function Page({ children, location: { pathname } }) {
     const { settings } = useContext(SettingsContext);
     const settledSettings = settings?.settledSettings;
+    const repository = settings?.repository;
     const isShowedSettingsButton = !pathname.includes('settings') && !settledSettings;
 
     return (
         <Wrapper>
             <Header>
-                <HeaderTitle>School CI server</HeaderTitle>
+                {repository ?
+                    <RepoTitle>{repository}</RepoTitle> :
+                    <HeaderTitle>School CI server</HeaderTitle>
+                }
                 {isShowedSettingsButton && (
                     <StyledLink to='/settings'>
                         <Button
