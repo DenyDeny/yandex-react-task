@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../../components/Button';
-import { MiniSettings } from '../../components/Icon';
+import { MiniSettings, Run } from '../../components/Icon';
+import { Modal } from '../../components/Modal';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { SettingsContext } from '../Context';
 import {
     Content,
@@ -15,6 +17,7 @@ import {
     RepoTitle,
     StyledLink,
     Wrapper,
+    GroupButtons,
 } from './styled';
 
 export function Page({ children, location: { pathname } }) {
@@ -23,6 +26,16 @@ export function Page({ children, location: { pathname } }) {
     const repository = settings?.repository;
     const isShowedSettingsButton = !pathname.includes('settings') && !settledSettings;
 
+    const [isModalOpened, setIsModalOpened] = useState(false);
+
+    const modalComponent = useRef(null);
+
+    const onModalClose = () => {
+        setIsModalOpened(false);
+    }
+
+    useOutsideClick(modalComponent, onModalClose);
+
     return (
         <Wrapper>
             <Header>
@@ -30,6 +43,23 @@ export function Page({ children, location: { pathname } }) {
                     <RepoTitle>{repository}</RepoTitle> :
                     <HeaderTitle>School CI server</HeaderTitle>
                 }
+                {repository && (
+                    <GroupButtons>
+                        <Button
+                            icon={<Run size={12} />}
+                            color='gray'
+                            side={8}
+                            onClick={setIsModalOpened}
+                        >
+                            <LinkButtonText>Run build</LinkButtonText>
+                        </Button>
+                        <Button
+                            icon={<MiniSettings size={12} />}
+                            color='gray'
+                            side={8}
+                        />
+                    </GroupButtons>
+                )}
                 {isShowedSettingsButton && (
                     <StyledLink to='/settings'>
                         <Button
@@ -51,6 +81,13 @@ export function Page({ children, location: { pathname } }) {
                     <FooterAddress>© 2020 Your Name</FooterAddress>
                 </FooterLinks>
             </Footer>
+            <Modal
+                ref={modalComponent}
+                isOpen={isModalOpened}
+                onClose={onModalClose}
+            >
+                Привет
+            </Modal>
         </Wrapper>
     )
 }

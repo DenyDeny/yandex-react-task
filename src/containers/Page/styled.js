@@ -70,3 +70,10 @@ export const StyledLink = styled(Link)`
 export const RepoTitle = styled(HeaderTitle)`
   color: var(--black);
 `;
+
+export const GroupButtons = styled.div`
+  display: flex;
+  & > :not(:last-child) {
+    margin-right: 0.5rem;
+  }
+`;

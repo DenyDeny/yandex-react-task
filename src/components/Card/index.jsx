@@ -36,7 +36,6 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: auto 1fr auto;
   column-gap: 0.5rem;
-  width: 100%;
   border-radius: 6px;
   padding: 0.75rem 1.5rem;
   box-shadow: 0 0 1px rgba(67, 68, 69, 0.3), 0 1px 1px rgba(67, 68, 69, 0.3);
