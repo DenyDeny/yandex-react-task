@@ -79,10 +79,14 @@ export function Form() {
     }, dispatch] = useReducer(formReducer, initialState, initSettings);
 
     const handleTextChange = useCallback((e) => {
+        let payload = e.target.value;
+        if (e.target.name === 'period') {
+            payload = e.target.value.replace(/[^0-9]/g, '');
+        }
         dispatch({
             type: HANDLE_INPUT_TEXT,
             field: e.target.name,
-            payload: e.target.value,
+            payload,
         })
     }, []);
 
@@ -168,7 +172,7 @@ export function Form() {
                         name='period'
                         value={period}
                         onChange={handleTextChange}
-                        type='number'
+                        errorMessage={errors.period}
                     />
                     <SyncFieldText>minutes</SyncFieldText>
                 </SyncField>

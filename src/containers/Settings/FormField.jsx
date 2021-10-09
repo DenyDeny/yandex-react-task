@@ -22,16 +22,6 @@ const Field = styled.input`
     outline: none;
     border-color: var(--gray-border-color);
   }
-
-  &input[type='number'] {
-    -moz-appearance:textfield;
-  }
-
-  &[type=number]::-webkit-inner-spin-button,
-  &[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
 `;
 
 const FieldWrapper = styled.div`
