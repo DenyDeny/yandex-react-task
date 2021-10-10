@@ -18,14 +18,19 @@ export function ContextComponent({ children }) {
     const [settings, dispatch] = useReducer(settingsReducer, initialState, initSettings);
 
     const saveSettings = async (settings) => {
-        return new Promise((resolve => {
+        return new Promise(((resolve, reject) => {
             setTimeout(() => {
-                dispatch({
-                    type: SAVE_SETTINGS,
-                    payload: settings,
-                });
-                setStorageSettings({ ...settings, settledSettings: true })
-                resolve({ isSaved: true });
+                const random = Math.random();
+                if (random > 0.5) {
+                    dispatch({
+                        type: SAVE_SETTINGS,
+                        payload: settings,
+                    });
+                    setStorageSettings({ ...settings, settledSettings: true });
+                    resolve({ isSaved: true });
+                } else {
+                    reject('Smth happened wrong')
+                }
             }, 500);
         }))
     };

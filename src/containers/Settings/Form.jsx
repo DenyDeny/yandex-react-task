@@ -115,15 +115,19 @@ export function Form() {
         setErrors(errors);
         if (isFormValid(errors)) {
             setSaving(true);
-            const { isSaved } = await saveSettings({
-                repository,
-                buildCommand,
-                period,
-                branch,
-            })
-            setSaving(false);
-            if (isSaved) {
-                history.push('/')
+            try {
+                const { isSaved } = await saveSettings({
+                    repository,
+                    buildCommand,
+                    period,
+                    branch,
+                })
+                if (isSaved) {
+                    history.push('/')
+                }
+            } catch (e) {
+                alert(e);
+                setSaving(false);
             }
         }
     }, [repository, buildCommand, branch, period]);
