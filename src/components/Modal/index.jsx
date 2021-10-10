@@ -4,7 +4,6 @@ import { createPortal } from 'react-dom';
 
 const ModalBackgroundStyled = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(2px);
   position: absolute;
   top: 0;
   left: 0;
@@ -14,9 +13,9 @@ const ModalBackgroundStyled = styled.div`
 `;
 
 const ModalStyled = styled.div`
+  box-shadow: 0 0 1px rgba(67, 68, 69, 0.3), 0 1px 1px rgba(67, 68, 69, 0.3);
   background-color: var(--white);
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
   position: absolute;
   top: 50%;
   left: 50%;
