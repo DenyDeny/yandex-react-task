@@ -1,21 +1,24 @@
-import React, { createContext, useReducer, useMemo } from 'react';
-import settingsReducer, { SAVE_SETTINGS } from './settingsReducer';
+import React, { createContext, useEffect, useMemo } from 'react';
+import { useStore, useDispatch } from 'react-redux';
+import { SAVE_SETTINGS } from '../../reducers/settings';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 export const SettingsContext = createContext(null);
 
-const initialState = {
-    repository: '',
-    buildCommand: '',
-    branch: '',
-    period: 0,
-    settledSettings: false,
-};
-
 export function ContextComponent({ children }) {
+    // const store = useStore();
+    const dispatch = useDispatch();
+
+    // const { settings } = store.getState();
+
     const [storageSettings, setStorageSettings] = useLocalStorage('settings', '');
-    const initSettings = (initial) => storageSettings || initial;
-    const [settings, dispatch] = useReducer(settingsReducer, initialState, initSettings);
+
+    useEffect(() => {
+        dispatch({
+            type: SAVE_SETTINGS,
+            payload: storageSettings,
+        })
+    }, [storageSettings]);
 
     const saveSettings = async (settings) => {
         return new Promise(((resolve, reject) => {
@@ -36,8 +39,8 @@ export function ContextComponent({ children }) {
     };
 
     const contextValue = useMemo(() => {
-        return { settings, saveSettings };
-    }, [settings, saveSettings]);
+        return { saveSettings };
+    }, [saveSettings]);
 
     return (
         <SettingsContext.Provider value={contextValue}>

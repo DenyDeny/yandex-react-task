@@ -1,5 +1,6 @@
 import React, { useState, useReducer, useCallback, useContext } from 'react';
 import { useHistory } from "react-router-dom";
+import { useStore } from 'react-redux';
 import styled from 'styled-components';
 import { validate } from '../../utils';
 import { Button } from '../../components/Button';
@@ -11,7 +12,7 @@ import settingsReducer, {
     CLEAR_FIELD,
     SET_ERRORS,
     initialState,
-} from '../../reducers/settings';
+} from './formReducer';
 import { SettingsContext } from '../Context';
 
 const Wrapper = styled.div`
@@ -65,9 +66,11 @@ export function Form() {
 
     const [saving, setSaving] = useState(false);
 
+    const store = useStore();
+    const { settings } = store.getState();
+
     const context = useContext(SettingsContext);
     const saveSettings = context?.saveSettings;
-    const settings = context?.settings;
 
     const initSettings = (initial) => ({...initialState, ...settings}) || initial;
 
@@ -78,6 +81,9 @@ export function Form() {
         period,
         errors,
     }, dispatch] = useReducer(settingsReducer, initialState, initSettings);
+
+    console.log('settings', settings);
+    console.log('repository', repository)
 
     const handleTextChange = useCallback((e) => {
         let payload = e.target.value;

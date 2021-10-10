@@ -1,34 +1,20 @@
-export const HANDLE_INPUT_TEXT = 'HANDLE_INPUT_TEXT';
-export const CLEAR_FIELD = 'CLEAR_FIELD';
-export const SET_ERRORS = 'SET_ERRORS';
+export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 
 export const initialState = {
     repository: '',
     buildCommand: '',
     branch: '',
     period: 0,
-    errors: {
-        repository: '',
-        buildCommand: '',
-    }
+    settledSettings: false,
 };
 
-const settings = (state, action) => {
+const settings = (state = initialState, action) => {
     switch (action.type) {
-        case HANDLE_INPUT_TEXT:
+        case SAVE_SETTINGS:
             return {
                 ...state,
-                [action.field]: action.payload,
-            }
-        case CLEAR_FIELD:
-            return {
-                ...state,
-                [action.field]: '',
-            }
-        case SET_ERRORS:
-            return {
-                ...state,
-                errors: action.payload,
+                ...action.payload,
+                settledSettings: true,
             }
         default: return state;
     }
