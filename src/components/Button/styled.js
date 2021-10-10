@@ -6,6 +6,20 @@ function getColorName(color) {
             return 'var(--yellow)';
         case 'gray':
             return 'var(--gray)';
+        case 'ghost':
+            return 'var(--white)';
+        default: return 'var(--white)';
+    }
+}
+
+function getBorderColor(color) {
+    switch (color) {
+        case 'yellow':
+            return 'var(--yellow)';
+        case 'gray':
+            return 'var(--gray)';
+        case 'ghost':
+            return 'var(--field-border-color)';
         default: return 'var(--white)';
     }
 }
@@ -36,7 +50,7 @@ export const Wrapper = styled.button`
     border-radius: 4px;
     padding: ${props => props.side === 8? 8 : 12}px ${props => props.side}px;
     background-color: ${({ color }) => getColorName(color)};
-    border: 2px solid ${({ color }) => getColorName(color)};
+    border: 2px solid ${({ color }) => getBorderColor(color)};
     cursor: pointer;
 
     &:hover {
