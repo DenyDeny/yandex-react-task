@@ -1,8 +1,9 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useState, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../../components/Button';
 import { MiniSettings, Run } from '../../components/Icon';
 import { Modal } from '../../components/Modal';
+import { RunBuildForm } from '../RunBuildForm';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { SettingsContext } from '../Context';
 import {
@@ -30,9 +31,9 @@ export function Page({ children, location: { pathname } }) {
 
     const modalComponent = useRef(null);
 
-    const onModalClose = () => {
+    const onModalClose = useCallback(() => {
         setIsModalOpened(false);
-    }
+    }, [isModalOpened]);
 
     useOutsideClick(modalComponent, onModalClose);
 
@@ -86,7 +87,9 @@ export function Page({ children, location: { pathname } }) {
                 isOpen={isModalOpened}
                 onClose={onModalClose}
             >
-                Привет
+                <RunBuildForm
+                    onCancel={onModalClose}
+                />
             </Modal>
         </Wrapper>
     )

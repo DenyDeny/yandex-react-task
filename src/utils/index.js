@@ -5,12 +5,11 @@ export function validate({
     const errors = {};
 
     if (!repository) {
-        errors.repository = 'Please fill "GitHub repository" field'
+        errors.repository = 'Please fill "GitHub repository" field';
     }
 
     if (!buildCommand) {
-        errors.buildCommand = 'Please fill "Build command" field'
-
+        errors.buildCommand = 'Please fill "Build command" field';
     }
 
     return errors;

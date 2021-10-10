@@ -3,19 +3,20 @@ import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import { validate } from '../../utils';
 import { Button } from '../../components/Button';
-import { FormField } from './FormField';
-import formReducer, { HANDLE_INPUT_TEXT, CLEAR_FIELD, SET_ERRORS } from './reducers/formReducer';
+import { Form as FormComponent } from '../../components/Form';
+import { FormField } from '../../components/Form/FormField';
+import settingsReducer, {
+    HANDLE_INPUT_TEXT,
+    CLEAR_FIELD,
+    SET_ERRORS,
+    initialState,
+} from '../../reducers/settings';
 import { SettingsContext } from '../Context';
 
 const Wrapper = styled.div`
     width: 100%;
     max-width: 29.75rem;
     margin-bottom: 2rem;
-`;
-
-const FormElement = styled.form`
-    display: flex;
-    flex-direction: column;
 `;
 
 const SyncField = styled.div`
@@ -48,17 +49,6 @@ const ActionsButtonsGroup = styled.div`
     }
 `;
 
-const initialState = {
-    repository: '',
-    buildCommand: '',
-    branch: '',
-    period: 0,
-    errors: {
-        repository: '',
-        buildCommand: '',
-    }
-};
-
 export function Form() {
     const history = useHistory();
 
@@ -76,7 +66,7 @@ export function Form() {
         branch,
         period,
         errors,
-    }, dispatch] = useReducer(formReducer, initialState, initSettings);
+    }, dispatch] = useReducer(settingsReducer, initialState, initSettings);
 
     const handleTextChange = useCallback((e) => {
         let payload = e.target.value;
@@ -134,7 +124,7 @@ export function Form() {
 
     return (
         <Wrapper>
-            <FormElement>
+            <FormComponent>
                 <FormField
                     name='repository'
                     label='GitHub repository'
@@ -194,7 +184,7 @@ export function Form() {
                         Cancel
                     </Button>
                 </ActionsButtonsGroup>
-            </FormElement>
+            </FormComponent>
         </Wrapper>
     )
 }

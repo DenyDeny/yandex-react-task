@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { RequiredSymbol, ClearField } from '../../components/Icon';
+import { RequiredSymbol, ClearField } from '../../../components/Icon';
 
 const Wrapper = styled.div`
   display: flex;
@@ -66,17 +66,19 @@ const ErrorMessage = styled.span`
 `;
 
 export function FormField({
-  label,
-  name,
-  placeholder,
-  isRequired,
-  canClear,
-  onClear,
-  value,
-  errorMessage,
-  ...other
+    label,
+    name,
+    placeholder,
+    isRequired,
+    canClear,
+    onClear,
+    value,
+    errorMessage,
+    ...other
 }) {
+    const field = useRef(null);
     const clearField = useCallback(() => {
+        field.current.focus();
         onClear(name)
     }, [name, onClear]);
     return (
@@ -94,6 +96,7 @@ export function FormField({
             )}
             <FieldWrapper>
                 <Field
+                    ref={field}
                     id={name}
                     name={name}
                     placeholder={placeholder}
@@ -101,7 +104,7 @@ export function FormField({
                     errorMessage={errorMessage}
                     {...other}
                 />
-                {canClear && <StyledClearField onClick={clearField} size={16} />}
+                {canClear && value && <StyledClearField onClick={clearField} size={16} />}
             </FieldWrapper>
         </Wrapper>
     )
