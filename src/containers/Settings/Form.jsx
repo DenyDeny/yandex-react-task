@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import { validate } from '../../utils';
 import { Button } from '../../components/Button';
+import { LinkButton } from '../../components/LinkButton';
 import { Form as FormComponent } from '../../components/Form';
 import { FormField } from '../../components/Form/FormField';
 import settingsReducer, {
@@ -117,11 +118,6 @@ export function Form() {
         }
     }, [repository, buildCommand, branch, period]);
 
-    const handleCancel = useCallback((e) => {
-        e.preventDefault();
-        history.push('/');
-    }, []);
-
     return (
         <Wrapper>
             <FormComponent>
@@ -175,14 +171,14 @@ export function Form() {
                     >
                         Save
                     </Button>
-                    <Button
-                        onClick={handleCancel}
+                    <LinkButton
+                        linkTo='/'
                         color='gray'
                         side={20}
                         disabled={saving}
                     >
                         Cancel
-                    </Button>
+                    </LinkButton>
                 </ActionsButtonsGroup>
             </FormComponent>
         </Wrapper>

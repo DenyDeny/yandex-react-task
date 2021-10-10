@@ -1,6 +1,7 @@
 import React, { useContext, useState, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../../components/Button';
+import { LinkButton } from '../../components/LinkButton';
 import { MiniSettings, Run } from '../../components/Icon';
 import { Modal } from '../../components/Modal';
 import { RunBuildForm } from '../RunBuildForm';
@@ -26,6 +27,7 @@ export function Page({ children, location: { pathname } }) {
     const settledSettings = settings?.settledSettings;
     const repository = settings?.repository;
     const isShowedSettingsButton = !pathname.includes('settings') && !settledSettings;
+    const isShowedRunButton = !pathname.includes('settings');
 
     const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -40,11 +42,11 @@ export function Page({ children, location: { pathname } }) {
     return (
         <Wrapper>
             <Header>
-                {repository ?
+                {repository && isShowedRunButton ?
                     <RepoTitle>{repository}</RepoTitle> :
                     <HeaderTitle>School CI server</HeaderTitle>
                 }
-                {repository && (
+                {repository && isShowedRunButton && (
                     <GroupButtons>
                         <Button
                             icon={<Run size={12} />}
@@ -54,7 +56,8 @@ export function Page({ children, location: { pathname } }) {
                         >
                             <LinkButtonText>Run build</LinkButtonText>
                         </Button>
-                        <Button
+                        <LinkButton
+                            linkTo='/settings'
                             icon={<MiniSettings size={12} />}
                             color='gray'
                             side={8}
