@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Header } from '../../components/Header';
 import { Page } from '../Page';
 import { Form } from './Form';
 
@@ -24,19 +25,30 @@ const DescriptionText = styled.p`
   color: var(--blue-grey-500);
 `;
 
-export function Settings(props) {
+const HeaderTitle = styled.h2`
+  font-size: 1.75rem;
+  color: var(--blue-grey-500);
+  margin: 0;
+`;
+
+export function Settings() {
     return (
-        <Page {...props}>
-            <Description>
-                <DescriptionTitle>
-                    Settings
-                </DescriptionTitle>
-                <DescriptionText>
-                    Configure repository connection and
-                    synchronization settings.
-                </DescriptionText>
-            </Description>
-            <Form />
+        <Page>
+            <Header>
+                <HeaderTitle>School CI server</HeaderTitle>
+            </Header>
+            <>
+                <Description>
+                    <DescriptionTitle>
+                        Settings
+                    </DescriptionTitle>
+                    <DescriptionText>
+                        Configure repository connection and
+                        synchronization settings.
+                    </DescriptionText>
+                </Description>
+                <Form />
+            </>
         </Page>
     )
 }

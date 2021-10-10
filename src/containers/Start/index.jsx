@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { MiniSettings } from '../../components/Icon';
+import { Page } from '../Page';
+import { Header } from '../../components/Header';
 import { LinkButton } from '../../components/LinkButton';
 import { Settings } from '../../components/Icon';
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,7 +14,7 @@ export const Wrapper = styled.div`
     height: 100%;
 `;
 
-export const Description = styled.p`
+const Description = styled.p`
     margin: 0;
     font-family: var(--font-family);
     font-size: 13px;
@@ -19,30 +22,53 @@ export const Description = styled.p`
     text-align: center;
 `;
 
-export const SettingsIcon = styled(Settings)`
+const SettingsIcon = styled(Settings)`
     margin-bottom: 2rem;
 `;
 
-export const StyledLink = styled(LinkButton)`
+const StyledLink = styled(LinkButton)`
     margin-top: 1.5rem;
     text-decoration: none;
 `;
 
+const HeaderTitle = styled.h2`
+  font-size: 1.75rem;
+  color: var(--blue-grey-500);
+  margin: 0;
+`;
+
+const LinkButtonText = styled.span`
+  margin-left: 0.5rem;
+`;
+
 export function Start() {
     return (
-        <Wrapper>
-            <SettingsIcon size={124} />
-            <Description>
-                Configure repository connection<br />
-                and synchronization settings
-            </Description>
-            <StyledLink
-                linkTo='/settings'
-                side={20}
-                color='yellow'
-            >
-                Open settings
-            </StyledLink>
-        </Wrapper>
+        <Page>
+            <Header>
+                <HeaderTitle>School CI server</HeaderTitle>
+                <LinkButton
+                    linkTo='/settings'
+                    icon={<MiniSettings size={12} />}
+                    color='gray'
+                    side={8}
+                >
+                    <LinkButtonText>Settings</LinkButtonText>
+                </LinkButton>
+            </Header>
+            <Wrapper>
+                <SettingsIcon size={124} />
+                <Description>
+                    Configure repository connection<br />
+                    and synchronization settings
+                </Description>
+                <StyledLink
+                    linkTo='/settings'
+                    side={20}
+                    color='yellow'
+                >
+                    Open settings
+                </StyledLink>
+            </Wrapper>
+        </Page>
     )
 }

@@ -1,82 +1,54 @@
-import React, { useContext, useState, useRef, useCallback } from 'react';
+import React from 'react';
+import styled from "styled-components";
 import PropTypes from 'prop-types';
-import { Button } from '../../components/Button';
-import { LinkButton } from '../../components/LinkButton';
-import { MiniSettings, Run } from '../../components/Icon';
-import { Modal } from '../../components/Modal';
-import { RunBuildForm } from '../RunBuildForm';
-import { useOutsideClick } from '../../hooks/useOutsideClick';
-import { SettingsContext } from '../Context';
-import {
-    Content,
-    Header,
-    HeaderTitle,
-    Footer,
-    FooterLinks,
-    FooterItem,
-    FooterAddress,
-    LinkButtonText,
-    RepoTitle,
-    StyledLink,
-    Wrapper,
-    GroupButtons,
-} from './styled';
 
-export function Page({ children, location: { pathname } }) {
-    const { settings } = useContext(SettingsContext);
-    const settledSettings = settings?.settledSettings;
-    const repository = settings?.repository;
-    const isShowedSettingsButton = !pathname.includes('settings') && !settledSettings;
-    const isShowedRunButton = !pathname.includes('settings');
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  margin: 0 auto;
+`;
 
-    const [isModalOpened, setIsModalOpened] = useState(false);
+const Content = styled.div`
+  padding: 0 6.25rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+`;
 
-    const modalComponent = useRef(null);
+const Footer = styled.footer`
+  align-self: normal;
+  padding: 0.5rem 6.25rem;
+  background-color: var(--blue-grey-50);
+  margin-top: auto;
+`;
 
-    const onModalClose = useCallback(() => {
-        setIsModalOpened(false);
-    }, [isModalOpened]);
+const FooterLinks = styled.div`
+  display: flex;
+`;
 
-    useOutsideClick(modalComponent, onModalClose);
+const FooterItem = styled.span`
+  color: var(--blue-grey-500);
+  margin-right: 0.75rem;
+  cursor: pointer;
 
+  &:hover {
+    color: var(--red-600);
+  }
+`;
+
+const FooterAddress = styled.span`
+  color: var(--blue-grey-500);
+  margin-left: auto;
+`;
+
+export function Page({ children }) {
     return (
         <Wrapper>
-            <Header>
-                {repository && isShowedRunButton ?
-                    <RepoTitle>{repository}</RepoTitle> :
-                    <HeaderTitle>School CI server</HeaderTitle>
-                }
-                {repository && isShowedRunButton && (
-                    <GroupButtons>
-                        <Button
-                            icon={<Run size={12} />}
-                            color='gray'
-                            side={8}
-                            onClick={setIsModalOpened}
-                        >
-                            <LinkButtonText>Run build</LinkButtonText>
-                        </Button>
-                        <LinkButton
-                            linkTo='/settings'
-                            icon={<MiniSettings size={12} />}
-                            color='gray'
-                            side={8}
-                        />
-                    </GroupButtons>
-                )}
-                {isShowedSettingsButton && (
-                    <StyledLink to='/settings'>
-                        <Button
-                            icon={<MiniSettings size={12} />}
-                            color='gray'
-                            side={8}
-                        >
-                            <LinkButtonText>Settings</LinkButtonText>
-                        </Button>
-                    </StyledLink>
-                )}
-            </Header>
-            <Content>{children}</Content>
+            {children[0]}
+            <Content>{children[1]}</Content>
             <Footer>
                 <FooterLinks>
                     <FooterItem>Support</FooterItem>
@@ -85,20 +57,11 @@ export function Page({ children, location: { pathname } }) {
                     <FooterAddress>© 2020 Your Name</FooterAddress>
                 </FooterLinks>
             </Footer>
-            <Modal
-                ref={modalComponent}
-                isOpen={isModalOpened}
-                onClose={onModalClose}
-            >
-                <RunBuildForm
-                    onCancel={onModalClose}
-                />
-            </Modal>
         </Wrapper>
     )
 }
 
 Page.propTyps = {
-    children: PropTypes.node.isRequired
+    children: PropTypes.arrayOf(PropTypes.node).isRequired
 }
 
