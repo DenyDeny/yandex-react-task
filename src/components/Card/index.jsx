@@ -32,19 +32,46 @@ function getMainColor(status) {
     }
 }
 
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  &:nth-child(1) {
+    grid-area: a;
+  }
+  &:nth-child(2) {
+    grid-area: b;
+  }
+  &:nth-child(3) {
+    grid-area: c;
+  }
+`;
+
 const Wrapper = styled.div`
   display: grid;
+  grid-template-areas: "a b c";
   grid-template-columns: auto 1fr auto;
   column-gap: 0.5rem;
   border-radius: 6px;
   padding: 0.75rem 1.5rem;
   box-shadow: 0 0 1px rgba(67, 68, 69, 0.3), 0 1px 1px rgba(67, 68, 69, 0.3);
+  &:hover {
+    box-shadow: 0px 0px 1px rgba(67, 68, 69, 0.3), 0px 2px 8px rgba(67, 68, 69, 0.3);
+  }
+  @media(max-width: 50rem) {
+    grid-template-areas:
+    "a b"
+    ". c";
+    padding: 1rem 0.75rem;
+  }
 `;
 
 const TaskId = styled.span`
   font-size: 18px;
   color: ${({ status }) => getMainColor(status)};
   margin-right: 0.25rem;
+  @media(max-width: 50rem) {
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const TaskName = styled.span`
@@ -55,11 +82,20 @@ const TaskIdNameWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 0.5rem;
+  @media(max-width: 50rem) {
+    flex-direction: column;
+  }
 `;
 
 const BranchUserWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  @media(max-width: 50rem) {
+    flex-direction: column;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--blue-grey-50);
+  }
 `;
 
 const DateTimeWrapper = styled.div`
@@ -68,12 +104,14 @@ const DateTimeWrapper = styled.div`
   flex-wrap: wrap;
   & > *:not(:last-child) {
     margin-bottom: 0.75rem;
+    @media(max-width: 50rem) {
+      margin-right: 10px;
+      margin-bottom: 0;
+    }
   }
-`;
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
+  @media(max-width: 50rem) {
+    flex-direction: row;
+  }
 `;
 
 export function Card({ id, branch, date, time, user, status, name, hashCommit }) {

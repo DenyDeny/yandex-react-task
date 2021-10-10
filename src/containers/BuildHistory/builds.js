@@ -19,7 +19,7 @@ export const BUILDS = [
         status: EXPECTED_STATUSES.ERROR,
         hashCommit: 'casdf0b9',
         id: 1367,
-        name: 'Super cool UI kit for making websites that look like games',
+        name: 'philip1967/my-aw esome-repo-with-long-long-long-repo-name',
     },
     {
         user: 'Gorge',

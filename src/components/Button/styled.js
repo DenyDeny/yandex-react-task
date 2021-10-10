@@ -72,9 +72,20 @@ export const Wrapper = styled.button`
         cursor: not-allowed;
     }
 
+    @media(max-width: 50rem) {
+      justify-content: center;
+    }
+
 `;
 
 export const WrapperIcon = styled.span`
   display: flex;
   margin: auto;
+`;
+
+export const WrapperChildren = styled.div`
+  display: flex;
+  @media(max-width: 50rem) {
+    display: ${({ icon }) => icon ? 'none' : 'flex'};
+  }
 `;

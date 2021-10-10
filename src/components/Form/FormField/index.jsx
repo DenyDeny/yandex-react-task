@@ -12,11 +12,17 @@ const Wrapper = styled.div`
 const Field = styled.input`
   box-sizing: border-box;
   display: flex;
+  font-size: 13px;
+  font-weight: 400;
   border-radius: 4px;
   border: 2px solid ${({ errorMessage }) =>
     errorMessage ? 'var(--red-500)' : 'var(--field-border-color)' };
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.75rem 2rem 0.75rem 0.75rem;
+
+  &[name="period"] {
+    padding: 0.75rem;
+  }
 
   &:focus {
     outline: none;
@@ -47,6 +53,7 @@ const StyledClearField = styled(ClearField)`
 const Label = styled.label`
   display: inline-block;
   font-size: 13px;
+  font-weight: 400;
   line-height: 1.5;
   color: var(--black);
   margin-bottom: 0.5rem;

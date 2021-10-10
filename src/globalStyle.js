@@ -18,10 +18,10 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     @font-face {
-        font-family:'YS Text';
-        font-weight:700;
-        font-style:normal;
-        font-stretch:normal;
+        font-family:' YS Text';
+        font-weight: 700;
+        font-style: normal;
+        font-stretch: normal;
         src: url(//yastatic.net/s3/home/fonts/ys/1/text-bold.woff2) format('woff2'), url(//yastatic.net/s3/home/fonts/ys/1/text-bold.woff) format('woff')
     }
 

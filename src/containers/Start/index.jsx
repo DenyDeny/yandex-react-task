@@ -35,6 +35,9 @@ const HeaderTitle = styled.h2`
   font-size: 1.75rem;
   color: var(--blue-grey-500);
   margin: 0;
+  @media(max-width: 50rem) {
+    font-size: 18px;
+  }
 `;
 
 const LinkButtonText = styled.span`

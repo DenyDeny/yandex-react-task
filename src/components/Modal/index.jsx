@@ -14,7 +14,7 @@ const ModalBackgroundStyled = styled.div`
 `;
 
 const ModalStyled = styled.div`
-  background: white;
+  background-color: var(--white);
   border: 1px solid #ccc;
   border-radius: 4px;
   position: absolute;
@@ -24,6 +24,9 @@ const ModalStyled = styled.div`
   width: 100%;
   max-width: 51.5rem;
   z-index: 2;
+  @media(max-width: 50rem) {
+    max-width: 90%;
+  }
 `;
 
 export const Modal = forwardRef(({ isOpen, children }, ref) => {

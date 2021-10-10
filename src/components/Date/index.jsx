@@ -15,7 +15,8 @@ const StyledDate = styled.span`
 
 const StyledCalendar = styled(Calendar)`
   color: var(--secondary);
-  margin-right: 0.375rem;
+    margin-right: 0.375rem;
+
 `;
 
 export function Date({ date }) {
@@ -24,7 +25,7 @@ export function Date({ date }) {
         <Wrapper>
             <StyledCalendar size={16} />
             <StyledDate>
-                {`${day} ${month.slice(0, 3).toLocaleLowerCase()}. ${hours}:${minutes}`}
+                {`${day} ${month.slice(0, 3).toLocaleLowerCase()}, ${hours}:${minutes}`}
             </StyledDate>
         </Wrapper>
     )

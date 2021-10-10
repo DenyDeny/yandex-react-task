@@ -33,6 +33,7 @@ const SyncField = styled.div`
 
 const SyncFieldText = styled.span`
     font-size: 13px;
+    font-weight: 400;
     line-height: 1.5;
 `;
 
@@ -47,6 +48,15 @@ const ActionsButtonsGroup = styled.div`
 
     & > :not(:last-child) {
         margin-right: 0.5rem;
+
+        @media(max-width: 50rem) {
+          margin-right: 0;
+          margin-bottom: 0.75rem;
+        }
+    }
+
+    @media(max-width: 50rem) {
+      flex-direction: column;
     }
 `;
 

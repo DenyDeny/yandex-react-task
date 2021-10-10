@@ -16,6 +16,9 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  @media(max-width: 50rem) {
+    padding: 0 1rem;
+  }
 `;
 
 const Footer = styled.footer`
@@ -23,13 +26,18 @@ const Footer = styled.footer`
   padding: 0.5rem 6.25rem;
   background-color: var(--blue-grey-50);
   margin-top: auto;
+  @media(max-width: 50rem) {
+    padding: 0.5rem 1rem;
+  }
 `;
 
-const FooterLinks = styled.div`
+const FooterItems = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
-const FooterItem = styled.span`
+const FooterLink = styled.a`
+  text-decoration: none;
   color: var(--blue-grey-500);
   margin-right: 0.75rem;
   cursor: pointer;
@@ -42,6 +50,10 @@ const FooterItem = styled.span`
 const FooterAddress = styled.span`
   color: var(--blue-grey-500);
   margin-left: auto;
+  @media(max-width: 50rem) {
+    flex: 1 1 100%;
+    margin-top: 0.5rem;
+  }
 `;
 
 export function Page({ children }) {
@@ -50,12 +62,30 @@ export function Page({ children }) {
             {children[0]}
             <Content>{children[1]}</Content>
             <Footer>
-                <FooterLinks>
-                    <FooterItem>Support</FooterItem>
-                    <FooterItem>Learning</FooterItem>
-                    <FooterItem>Русская версия</FooterItem>
+                <FooterItems>
+                    <FooterLink
+                        target="_blank"
+                        href='/'
+                        rel="noopener"
+                    >
+                        Support
+                    </FooterLink>
+                    <FooterLink
+                        target="_blank"
+                        href='/'
+                        rel="noopener"
+                    >
+                        Learning
+                    </FooterLink>
+                    <FooterLink
+                        target="_blank"
+                        href='/'
+                        rel="noopener"
+                    >
+                        Русская версия
+                    </FooterLink>
                     <FooterAddress>© 2020 Your Name</FooterAddress>
-                </FooterLinks>
+                </FooterItems>
             </Footer>
         </Wrapper>
     )

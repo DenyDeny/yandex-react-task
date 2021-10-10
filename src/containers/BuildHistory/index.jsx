@@ -32,6 +32,7 @@ const LinkButtonText = styled.span`
 
 const GroupButtons = styled.div`
   display: flex;
+  align-self: flex-start;
   & > :not(:last-child) {
     margin-right: 0.5rem;
   }
@@ -39,12 +40,13 @@ const GroupButtons = styled.div`
 
 const HeaderTitle = styled.h2`
   font-size: 1.75rem;
-  color: var(--blue-grey-500);
-  margin: 0;
-`;
-
-const RepoTitle = styled(HeaderTitle)`
   color: var(--black);
+  margin: 0;
+  word-break: break-word;
+  margin-right: 0.5rem;
+  @media(max-width: 50rem) {
+    font-size: 18px;
+  }
 `;
 
 export function BuildHistory() {
@@ -65,7 +67,7 @@ export function BuildHistory() {
         <>
             <Page>
                 <Header>
-                    <RepoTitle>{repository}</RepoTitle>
+                    <HeaderTitle>{repository}</HeaderTitle>
                     <GroupButtons>
                         <Button
                             icon={<Run size={12} />}

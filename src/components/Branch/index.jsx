@@ -7,6 +7,10 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   margin-right: 0.75rem;
+  @media(max-width: 50rem) {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const StyledName = styled.span`
