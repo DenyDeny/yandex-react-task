@@ -20,10 +20,15 @@ const StyledCalendar = styled(Calendar)`
 
 `;
 
-export function Date({ date }) {
+function getDate(timestamp) {
+    return new Date(timestamp * 1000);
+}
+
+export function DateComponent({ date }) {
     const { day, month, hours, minutes } = formatDate(date);
+    const title = getDate(date);
     return (
-        <Wrapper>
+        <Wrapper title={title}>
             <StyledCalendar size={16} />
             <StyledDate>
                 {`${day} ${month.slice(0, 3).toLocaleLowerCase()}, ${hours}:${minutes}`}
@@ -32,6 +37,6 @@ export function Date({ date }) {
     )
 }
 
-Date.propTypes = {
+DateComponent.propTypes = {
     date: PropTypes.number.isRequired,
 }

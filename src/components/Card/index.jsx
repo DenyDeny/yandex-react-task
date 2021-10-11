@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Success, Error, Waiting } from '../Icon';
-import { Date } from '../Date';
+import { DateComponent as Date } from '../Date';
 import { Time } from '../Time';
 import { Branch } from '../Branch';
 import { User } from '../User';
