@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import PropTypes from 'prop-types';
+import { Footer } from '../../components/Footer';
 
 const Wrapper = styled.div`
   display: grid;
@@ -21,72 +22,34 @@ const Content = styled.div`
   }
 `;
 
-const Footer = styled.footer`
-  align-self: normal;
-  padding: 0.5rem 6.25rem;
-  background-color: var(--blue-grey-50);
-  margin-top: auto;
-  @media(max-width: 50rem) {
-    padding: 0.5rem 1rem;
-  }
-`;
-
-const FooterItems = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const FooterLink = styled.a`
-  text-decoration: none;
-  color: var(--blue-grey-500);
-  margin-right: 0.75rem;
-  cursor: pointer;
-
-  &:hover {
-    color: var(--red-600);
-  }
-`;
-
-const FooterAddress = styled.span`
-  color: var(--blue-grey-500);
-  margin-left: auto;
-  @media(max-width: 50rem) {
-    flex: 1 1 100%;
-    margin-top: 0.5rem;
-  }
-`;
+const LINKS = [
+    {
+        value: 'Support',
+        to: '/',
+    },
+    {
+        value: 'Learning',
+        to: '/',
+    },
+    {
+        value: 'Русская версия',
+        to: '/',
+    },
+];
 
 export function Page({ children }) {
+    /**
+     * children[0] - Header
+     * children[1] - Content
+     */
     return (
         <Wrapper>
             {children[0]}
             <Content>{children[1]}</Content>
-            <Footer>
-                <FooterItems>
-                    <FooterLink
-                        target="_blank"
-                        href='/'
-                        rel="noopener"
-                    >
-                        Support
-                    </FooterLink>
-                    <FooterLink
-                        target="_blank"
-                        href='/'
-                        rel="noopener"
-                    >
-                        Learning
-                    </FooterLink>
-                    <FooterLink
-                        target="_blank"
-                        href='/'
-                        rel="noopener"
-                    >
-                        Русская версия
-                    </FooterLink>
-                    <FooterAddress>© 2020 Your Name</FooterAddress>
-                </FooterItems>
-            </Footer>
+            <Footer
+                links={LINKS}
+                copyright='Your Name'
+            />
         </Wrapper>
     )
 }
