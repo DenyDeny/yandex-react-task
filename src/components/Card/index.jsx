@@ -52,10 +52,12 @@ const Wrapper = styled.div`
   grid-template-columns: auto 1fr auto;
   column-gap: 0.5rem;
   border-radius: 6px;
+  font-family: var(--font-family);
   padding: 0.75rem 1.5rem;
   box-shadow: 0 0 1px rgba(67, 68, 69, 0.3), 0 1px 1px rgba(67, 68, 69, 0.3);
+  cursor: pointer;
   &:hover {
-    box-shadow: 0px 0px 1px rgba(67, 68, 69, 0.3), 0px 2px 8px rgba(67, 68, 69, 0.3);
+    box-shadow: 0 0 1px rgba(67, 68, 69, 0.3), 0 2px 8px rgba(67, 68, 69, 0.3);
   }
   @media(max-width: 50rem) {
     grid-template-areas:
@@ -67,6 +69,7 @@ const Wrapper = styled.div`
 
 const TaskId = styled.span`
   font-size: 18px;
+  font-weight: 500;
   color: ${({ status }) => getMainColor(status)};
   margin-right: 0.25rem;
   @media(max-width: 50rem) {
@@ -76,14 +79,17 @@ const TaskId = styled.span`
 
 const TaskName = styled.span`
   font-size: 15px;
+  font-weight: 400;
 `;
 
 const TaskIdNameWrapper = styled.div`
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   margin-bottom: 0.5rem;
   @media(max-width: 50rem) {
     flex-direction: column;
+    align-items: flex-start;
   }
 `;
 

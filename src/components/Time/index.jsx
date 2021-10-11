@@ -10,7 +10,8 @@ const Wrapper = styled.div`
 `;
 
 const StyledTime = styled.span`
-  color: var(--secondary);
+  font-size: 13px;
+  color: var(--black);
 `;
 
 const StyledClock = styled(Clock)`

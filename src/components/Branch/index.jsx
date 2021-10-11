@@ -14,12 +14,15 @@ const Wrapper = styled.div`
 `;
 
 const StyledName = styled.span`
-  color: var(--secondary);
+  font-size: 13px;
+  color: var(--black);
   margin-right: 0.25rem;
 `;
 
 const StyledHash = styled.span`
-  color: var(--secondary);
+  font-size: 13px;
+  color: var(--black);
+  opacity: 0.65;
 `;
 
 const StyledBranch = styled(BranchIcon)`

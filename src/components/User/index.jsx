@@ -9,7 +9,8 @@ const Wrapper = styled.div`
 `;
 
 const StyledText = styled.span`
-  color: var(--secondary)
+  font-size: 13px;
+  color: var(--black)
 `;
 
 const StyledUser = styled(UserIcon)`

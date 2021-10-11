@@ -10,7 +10,8 @@ const Wrapper = styled.div`
 `;
 
 const StyledDate = styled.span`
-  color: var(--secondary);
+  font-size: 13px;
+  color: var(--black);
 `;
 
 const StyledCalendar = styled(Calendar)`
