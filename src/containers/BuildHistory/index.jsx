@@ -1,4 +1,5 @@
-import React, { useContext, useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Page } from '../Page';
 import { Button } from '../../components/Button';
@@ -9,7 +10,6 @@ import { MiniSettings, Run } from '../../components/Icon';
 import { Modal } from '../../components/Modal';
 import { RunBuildForm } from '../RunBuildForm';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
-import { SettingsContext } from '../Context';
 import { BUILDS } from './builds';
 
 const Wrapper = styled.div`
@@ -49,8 +49,7 @@ const HeaderTitle = styled.h2`
   }
 `;
 
-export function BuildHistory() {
-    const { settings } = useContext(SettingsContext);
+function BuildHistory({ settings }) {
     const repository = settings?.repository;
 
     const [isModalOpened, setIsModalOpened] = useState(false);
@@ -130,3 +129,9 @@ export function BuildHistory() {
         </>
     )
 }
+
+const mapStateToProps = (state) => ({
+    settings: state.settings,
+});
+
+export default connect(mapStateToProps)(BuildHistory)

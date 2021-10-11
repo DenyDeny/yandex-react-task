@@ -1,6 +1,6 @@
-import React, { useState, useReducer, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useReducer, useCallback, useContext } from 'react';
 import { useHistory } from "react-router-dom";
-import { useStore } from 'react-redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { validate } from '../../utils';
 import { Button } from '../../components/Button';
@@ -11,6 +11,7 @@ import settingsReducer, {
     HANDLE_INPUT_TEXT,
     CLEAR_FIELD,
     SET_ERRORS,
+    UPDATE_SETTINGS,
     initialState,
 } from './formReducer';
 import { SettingsContext } from '../Context';
@@ -61,13 +62,10 @@ const ActionsButtonsGroup = styled.div`
     }
 `;
 
-export function Form() {
+function Form({ settings }) {
     const history = useHistory();
 
     const [saving, setSaving] = useState(false);
-
-    const store = useStore();
-    const { settings } = store.getState();
 
     const context = useContext(SettingsContext);
     const saveSettings = context?.saveSettings;
@@ -82,8 +80,12 @@ export function Form() {
         errors,
     }, dispatch] = useReducer(settingsReducer, initialState, initSettings);
 
-    console.log('settings', settings);
-    console.log('repository', repository)
+    useEffect(() => {
+        dispatch({
+            type: UPDATE_SETTINGS,
+            payload: settings,
+        })
+    }, [settings]);
 
     const handleTextChange = useCallback((e) => {
         let payload = e.target.value;
@@ -204,3 +206,9 @@ export function Form() {
         </Wrapper>
     )
 }
+
+const mapStateToProps = (state) => ({
+    settings: state.settings,
+});
+
+export default connect(mapStateToProps)(Form)

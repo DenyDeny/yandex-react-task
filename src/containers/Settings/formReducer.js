@@ -1,6 +1,7 @@
 export const HANDLE_INPUT_TEXT = 'HANDLE_INPUT_TEXT';
 export const CLEAR_FIELD = 'CLEAR_FIELD';
 export const SET_ERRORS = 'SET_ERRORS';
+export const UPDATE_SETTINGS = 'UPDATE_SETTINGS';
 
 export const initialState = {
     repository: '',
@@ -29,6 +30,11 @@ const settings = (state, action) => {
             return {
                 ...state,
                 errors: action.payload,
+            }
+        case UPDATE_SETTINGS:
+            return {
+                ...state,
+                ...action.payload,
             }
         default: return state;
     }

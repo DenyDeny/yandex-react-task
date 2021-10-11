@@ -1,12 +1,15 @@
-import React, { useContext } from 'react';
-import { useStore } from 'react-redux';
-import { BuildHistory } from '../BuildHistory';
+import React from 'react';
+import { connect } from 'react-redux';
+import BuildHistory from '../BuildHistory';
 import { Start } from '../Start';
-import { SettingsContext } from '../Context';
 
-export function Home() {
-    const store = useStore();
-    const { settings: { settledSettings } } = store;
-    // const { settings: { settledSettings } } = useContext(SettingsContext);
-    return settledSettings? <BuildHistory /> : <Start />
+function Home({ settings }) {
+    const { settledSettings } = settings;
+    return settledSettings ? <BuildHistory /> : <Start />
 }
+
+const mapStateToProps = (state) => ({
+    settings: state.settings,
+});
+
+export default connect(mapStateToProps)(Home);

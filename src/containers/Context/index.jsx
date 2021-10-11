@@ -1,24 +1,23 @@
 import React, { createContext, useEffect, useMemo } from 'react';
-import { useStore, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { SAVE_SETTINGS } from '../../reducers/settings';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 export const SettingsContext = createContext(null);
 
 export function ContextComponent({ children }) {
-    // const store = useStore();
     const dispatch = useDispatch();
-
-    // const { settings } = store.getState();
 
     const [storageSettings, setStorageSettings] = useLocalStorage('settings', '');
 
     useEffect(() => {
-        dispatch({
-            type: SAVE_SETTINGS,
-            payload: storageSettings,
-        })
-    }, [storageSettings]);
+        if (storageSettings) {
+            dispatch({
+                type: SAVE_SETTINGS,
+                payload: storageSettings,
+            })
+        }
+    }, []);
 
     const saveSettings = async (settings) => {
         return new Promise(((resolve, reject) => {
