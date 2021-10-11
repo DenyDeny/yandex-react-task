@@ -1,4 +1,5 @@
-import React, { forwardRef } from 'react';
+import React, { useEffect, forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 
@@ -28,8 +29,19 @@ const ModalStyled = styled.div`
   }
 `;
 
-export const Modal = forwardRef(({ isOpen, children }, ref) => {
+export const Modal = forwardRef(({ isOpen, onClose, children }, ref) => {
     if (!isOpen) return null;
+
+    useEffect(() => {
+        const close = (e) => {
+            if (e.keyCode === 27) {
+                onClose()
+            }
+        }
+        document.addEventListener('keydown', close)
+        return () => document.removeEventListener('keydown', close)
+    },[])
+
     return createPortal(
         <>
             <ModalBackgroundStyled />
@@ -39,3 +51,12 @@ export const Modal = forwardRef(({ isOpen, children }, ref) => {
         </>
         ,document.body);
 });
+
+Modal.propTypes = {
+    children: PropTypes.node.isRequired,
+    onClose: PropTypes.func,
+}
+
+Modal.defaultProps = {
+    onClose() {},
+}
