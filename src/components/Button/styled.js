@@ -85,6 +85,7 @@ export const WrapperIcon = styled.span`
 
 export const WrapperChildren = styled.div`
   display: flex;
+  white-space: nowrap;
   @media(max-width: 50rem) {
     display: ${({ icon }) => icon ? 'none' : 'flex'};
   }

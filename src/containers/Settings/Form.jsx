@@ -173,6 +173,7 @@ export function Form() {
                         value={period}
                         onChange={handleTextChange}
                         errorMessage={errors.period}
+                        inputMode='numeric'
                     />
                     <SyncFieldText>minutes</SyncFieldText>
                 </SyncField>
