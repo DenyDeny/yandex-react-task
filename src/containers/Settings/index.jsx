@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Header } from '../../components/Header';
+import { Heading } from '../../components/Heading';
 import { Page } from '../Page';
 import { Form } from './Form';
 
@@ -10,11 +11,8 @@ const Description = styled.div`
   margin-bottom: 1.5rem;
 `;
 
-const DescriptionTitle = styled.h4`
+const DescriptionTitle = styled.div`
   margin: 0;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.5;
   color: var(--black);
   margin-bottom: 8px;
 `;
@@ -27,26 +25,23 @@ const DescriptionText = styled.p`
   color: var(--blue-grey-500);
 `;
 
-const HeaderTitle = styled.h2`
-  font-size: 1.75rem;
-  font-weight: 500;
+const StyledHeading = styled.div`
   color: var(--blue-grey-500);
-  margin: 0;
-  @media(max-width: 50rem) {
-    font-size: 18px;
-  }
+  align-self: flex-start;
 `;
 
 export function Settings() {
     return (
         <Page>
             <Header>
-                <HeaderTitle>School CI server</HeaderTitle>
+                <StyledHeading>
+                    <Heading level={2}>School CI server</Heading>
+                </StyledHeading>
             </Header>
             <>
                 <Description>
                     <DescriptionTitle>
-                        Settings
+                        <Heading level={4} weight={700}>Settings</Heading>
                     </DescriptionTitle>
                     <DescriptionText>
                         Configure repository connection and

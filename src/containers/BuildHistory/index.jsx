@@ -4,6 +4,7 @@ import { Page } from '../Page';
 import { Button } from '../../components/Button';
 import { LinkButton } from '../../components/LinkButton';
 import { Header } from '../../components/Header';
+import { Heading } from '../../components/Heading';
 import { Card } from '../../components/Card';
 import { MiniSettings, Run } from '../../components/Icon';
 import { Modal } from '../../components/Modal';
@@ -38,15 +39,11 @@ const GroupButtons = styled.div`
   }
 `;
 
-const HeaderTitle = styled.h2`
-  font-size: 1.75rem;
+const StyledHeading = styled.div`
   color: var(--black);
-  margin: 0;
+  align-self: flex-start;
   word-break: break-word;
   margin-right: 0.5rem;
-  @media(max-width: 50rem) {
-    font-size: 18px;
-  }
 `;
 
 export function BuildHistory() {
@@ -67,7 +64,9 @@ export function BuildHistory() {
         <>
             <Page>
                 <Header>
-                    <HeaderTitle>{repository}</HeaderTitle>
+                    <StyledHeading>
+                        <Heading level={2}>{repository}</Heading>
+                    </StyledHeading>
                     <GroupButtons>
                         <Button
                             icon={<Run size={12} />}
@@ -89,25 +88,13 @@ export function BuildHistory() {
                     { BUILDS.map((
                         {
                             id,
-                            user,
-                            branch,
-                            time,
-                            date,
-                            status,
-                            hashCommit,
-                            name,
+                            ...other
                         }
                     ) => (
                         <Card
                             key={id}
                             id={id}
-                            name={name}
-                            user={user}
-                            status={status}
-                            time={time}
-                            date={date}
-                            branch={branch}
-                            hashCommit={hashCommit}
+                            {...other}
                         />
                     ))}
                     <StyledButton

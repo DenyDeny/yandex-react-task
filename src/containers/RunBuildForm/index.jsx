@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Form } from '../../components/Form';
+import { Heading } from '../../components/Heading';
 import { Button } from '../../components/Button';
 import { FormField } from '../../components/Form/FormField';
 
@@ -41,7 +42,7 @@ export function RunBuildForm({ onCancel }) {
 
     const onSubmit = useCallback((e) => {
         e.preventDefault();
-        const hashError = commitHash.length? '' : 'Please fill this field';
+        const hashError = commitHash.length ? '' : 'Please fill this field';
         setErrors(hashError);
         if (!hashError) {
             alert('Success');
@@ -50,7 +51,7 @@ export function RunBuildForm({ onCancel }) {
 
     return (
         <Wrapper>
-            <Title>New build</Title>
+            <Heading level={3}>New build</Heading>
             <Description>Enter the commit hash which you want to build.</Description>
             <Form>
                 <FormField

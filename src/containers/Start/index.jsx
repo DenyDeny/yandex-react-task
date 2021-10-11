@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { MiniSettings } from '../../components/Icon';
 import { Page } from '../Page';
 import { Header } from '../../components/Header';
+import { Heading } from '../../components/Heading';
 import { LinkButton } from '../../components/LinkButton';
 import { Settings } from '../../components/Icon';
 
@@ -31,13 +32,10 @@ const StyledLink = styled(LinkButton)`
     text-decoration: none;
 `;
 
-const HeaderTitle = styled.h2`
-  font-size: 1.75rem;
+const StyledHeading = styled.div`
   color: var(--blue-grey-500);
   margin: 0;
-  @media(max-width: 50rem) {
-    font-size: 18px;
-  }
+  align-self: flex-start;
 `;
 
 const LinkButtonText = styled.span`
@@ -48,7 +46,9 @@ export function Start() {
     return (
         <Page>
             <Header>
-                <HeaderTitle>School CI server</HeaderTitle>
+                <StyledHeading>
+                    <Heading level={2}>School CI server</Heading>
+                </StyledHeading>
                 <LinkButton
                     linkTo='/settings'
                     icon={<MiniSettings size={12} />}
